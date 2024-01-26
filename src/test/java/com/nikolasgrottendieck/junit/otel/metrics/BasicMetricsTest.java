@@ -1,0 +1,116 @@
+package com.nikolasgrottendieck.junit.otel.metrics;
+
+import com.nikolasgrottendieck.junit.otel.OpenTelemetryMetrics;
+import io.opentelemetry.sdk.testing.assertj.OpenTelemetryAssertions;
+import io.opentelemetry.sdk.testing.junit5.OpenTelemetryExtension;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.RegisterExtension;
+
+import static com.nikolasgrottendieck.junit.otel.SemConName.TEST_ABORT_COUNTER;
+import static com.nikolasgrottendieck.junit.otel.SemConName.TEST_COUNTER;
+import static com.nikolasgrottendieck.junit.otel.SemConName.TEST_DISABLED_COUNTER;
+import static com.nikolasgrottendieck.junit.otel.SemConName.TEST_FAILURE_COUNTER;
+import static com.nikolasgrottendieck.junit.otel.SemConName.TEST_SUCCESS_COUNTER;
+import static com.nikolasgrottendieck.junit.otel.helper.TestCaseHelpers.engineTestKit;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.junit.platform.engine.discovery.DiscoverySelectors.selectClass;
+
+class BasicMetricsTest {
+
+	@RegisterExtension
+	private static final OpenTelemetryExtension otelTesting = OpenTelemetryExtension.create();
+
+	@Test
+	void verifyMetrics() {
+		engineTestKit()
+			.selectors(selectClass(MetricsExampleTest.class))
+			.execute()
+			.testEvents()
+			.assertStatistics(stats ->
+				stats.skipped(1)
+					.started(3)
+					.succeeded(1)
+					.aborted(1)
+					.failed(1)
+			);
+
+		assertThat(otelTesting.getMetrics())
+			.satisfiesExactlyInAnyOrder(
+				metricData ->
+					OpenTelemetryAssertions.assertThat(metricData)
+						.hasName(TEST_ABORT_COUNTER.getOtelName())
+						.hasLongSumSatisfying(
+							sum -> sum.hasPointsSatisfying(point -> point.hasValue(1)
+							)
+						),
+				metricData ->
+					OpenTelemetryAssertions.assertThat(metricData)
+						.hasName(TEST_COUNTER.getOtelName())
+						.hasLongSumSatisfying(
+							sum -> sum.hasPointsSatisfying(point -> point.hasValue(4)
+							)
+						),
+				metricData ->
+					OpenTelemetryAssertions.assertThat(metricData)
+						.hasName(TEST_DISABLED_COUNTER.getOtelName())
+						.hasLongSumSatisfying(
+							sum -> sum.hasPointsSatisfying(point -> point.hasValue(1)
+							)
+						),
+				metricData ->
+					OpenTelemetryAssertions.assertThat(metricData)
+						.hasName(TEST_FAILURE_COUNTER.getOtelName())
+						.hasLongSumSatisfying(
+							sum -> sum.hasPointsSatisfying(point -> point.hasValue(1)
+							)
+						),
+				metricData ->
+					OpenTelemetryAssertions.assertThat(metricData)
+						.hasName(TEST_SUCCESS_COUNTER.getOtelName())
+						.hasLongSumSatisfying(
+							sum -> sum.hasPointsSatisfying(point -> point.hasValue(1)
+							)
+						)
+			);
+	}
+
+	@ExtendWith(OpenTelemetryMetrics.class)
+	@TestMethodOrder(OrderAnnotation.class)
+	static class MetricsExampleTest {
+
+		@Test
+		@Disabled("for demonstration purposes")
+		@Order(1)
+		void skippedTest() {
+			// skipped ...
+		}
+
+		@Test
+		@Order(2)
+		void succeedingTest() {
+			assertTrue(true);
+		}
+
+		@Test
+		@Order(3)
+		void abortedTest() {
+			assumeTrue("abc".contains("Z"), "abc does not contain Z");
+			// aborted ...
+		}
+
+		@Test
+		@Order(4)
+		void failingTest() {
+			fail("failed on purpose");
+		}
+	}
+
+}

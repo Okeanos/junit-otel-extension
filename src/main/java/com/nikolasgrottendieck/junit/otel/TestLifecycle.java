@@ -1,0 +1,15 @@
+package com.nikolasgrottendieck.junit.otel;
+
+public enum TestLifecycle {
+	AFTER_ALL,
+	AFTER_EACH,
+	BEFORE_ALL,
+	BEFORE_EACH,
+	CLASS_CONSTRUCTOR,
+	DISABLED,
+	FACTORY_METHOD,
+	PRE_INSTANCE_CONSTRUCT,
+	PRE_INSTANCE_DESTROY,
+	TEST_CLASS,
+	TEST_EXECUTION,
+}

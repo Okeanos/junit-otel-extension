@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.example</groupId>
+	<artifactId>junit-otel-extension-example</artifactId>
+	<name>JUnit OTEL Extension Example</name>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>A JUnit tracing and metrics extension example using Open Telemetry</description>
+
+	<licenses>
+		<license>
+			<name>MIT</name>
+			<url>https://github.com/Okeanos/junit-otel-extension/blob/main/LICENSE</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<repositories>
+		<repository>
+			<id>github</id>
+			<name>GitHub Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/Okeanos/junit-otel-extension</url>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<properties>
+		<!-- java 17 required for the opentelemetry-maven-extension; it doesn't support 21 -->
+		<java.version>17</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+		<maven.compiler.encoding>${project.build.sourceEncoding}</maven.compiler.encoding>
+
+		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+		<maven-dependency.version>3.6.1</maven-dependency.version>
+		<maven-surefire.version>3.2.5</maven-surefire.version>
+		<maven-surefire-report-plugin.version>${maven-surefire.version}</maven-surefire-report-plugin.version>
+		<maven-toolchains-plugin.version>3.2.0</maven-toolchains-plugin.version>
+
+		<junit-otel-extension.version>0.0.1-SNAPSHOT</junit-otel-extension.version>
+
+		<httpclient.version>5.2.3</httpclient.version>
+		<junit-jupiter.version>5.10.2</junit-jupiter.version>
+		<opentelemetry-agent.version>2.3.0</opentelemetry-agent.version>
+		<opentelemetry-bom.version>1.37.0</opentelemetry-bom.version>
+		<opentelemetry-instrumentation.version>2.0.0</opentelemetry-instrumentation.version>
+		<opentelemetry-maven-extension.version>1.32.0-alpha</opentelemetry-maven-extension.version>
+		<wiremock.version>3.5.4</wiremock.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.junit</groupId>
+				<artifactId>junit-bom</artifactId>
+				<version>${junit-jupiter.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.opentelemetry</groupId>
+				<artifactId>opentelemetry-bom</artifactId>
+				<version>${opentelemetry-bom.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.opentelemetry.javaagent</groupId>
+			<artifactId>opentelemetry-javaagent</artifactId>
+			<version>${opentelemetry-agent.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents.client5</groupId>
+			<artifactId>httpclient5-fluent</artifactId>
+			<version>${httpclient.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.wiremock</groupId>
+			<artifactId>wiremock</artifactId>
+			<version>${wiremock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.nikolasgrottendieck</groupId>
+			<artifactId>junit-otel-extension</artifactId>
+			<version>${junit-otel-extension.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${maven-dependency.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-report-plugin</artifactId>
+					<version>${maven-surefire-report-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-toolchains-plugin</artifactId>
+					<version>${maven-toolchains-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>process-test-classes</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>io.opentelemetry.javaagent</groupId>
+									<artifactId>opentelemetry-javaagent</artifactId>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}</outputDirectory>
+									<destFileName>otelagent.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<parallel>classes</parallel>
+					<threadCount>10</threadCount>
+					<argLine>-javaagent:${project.build.directory}/otelagent.jar -Dotel.service.name="${project.name}"</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-toolchains-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>toolchain</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<toolchains>
+						<jdk>
+							<version>${java.version}</version>
+						</jdk>
+					</toolchains>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<extensions>
+			<extension>
+				<groupId>io.opentelemetry.contrib</groupId>
+				<artifactId>opentelemetry-maven-extension</artifactId>
+				<version>${opentelemetry-maven-extension.version}</version>
+			</extension>
+		</extensions>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>
