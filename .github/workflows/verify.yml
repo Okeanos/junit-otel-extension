@@ -1,0 +1,25 @@
+name: Verify
+
+# yamllint disable-line rule:truthy
+on: [ push, pull_request, workflow_dispatch ]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+      - name: Run EditorConfig Checker
+        run: |
+          go run github.com/editorconfig-checker/editorconfig-checker/v2/cmd/editorconfig-checker@2.8.0 --exclude .git
+      - name: Run yamllint
+        run: |
+          pip install yamllint
+          yamllint .
+      - uses: bewuethr/shellcheck-action@v2
+      - uses: DavidAnson/markdownlint-cli2-action@v15
