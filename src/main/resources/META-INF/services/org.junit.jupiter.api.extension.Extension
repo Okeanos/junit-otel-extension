@@ -1,0 +1,2 @@
+com.nikolasgrottendieck.junit.otel.OpenTelemetryMetrics
+com.nikolasgrottendieck.junit.otel.OpenTelemetrySimpleTracing
