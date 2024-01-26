@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.nikolasgrottendieck</groupId>
+	<artifactId>junit-otel-extension</artifactId>
+	<name>${project.artifactId}</name>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>A JUnit tracing and metrics extension for Open Telemetry</description>
+	<url>https://github.com/Okeanos/junit-otel-extension</url>
+
+	<licenses>
+		<license>
+			<name>MIT</name>
+			<url>https://github.com/Okeanos/junit-otel-extension/blob/main/LICENSE</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:https://github.com/Okeanos/junit-otel-extension</connection>
+		<developerConnection>scm:git:https://github.com/Okeanos/junit-otel-extension</developerConnection>
+		<url>https://github.com/Okeanos/junit-otel-extension</url>
+		<tag>HEAD</tag>
+	</scm>
+
+	<distributionManagement>
+		<repository>
+			<id>github</id>
+			<name>GitHub Okeanos Apache Maven Packages</name>
+			<url>https://maven.pkg.github.com/Okeanos/junit-otel-extension</url>
+		</repository>
+	</distributionManagement>
+
+	<properties>
+		<!-- java 17 required for the opentelemetry-maven-extension; it doesn't support 21 -->
+		<java.version>17</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
+		<maven.compiler.release>${java.version}</maven.compiler.release>
+		<maven.compiler.encoding>${project.build.sourceEncoding}</maven.compiler.encoding>
+
+		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+		<maven-jxr-plugin.version>3.3.2</maven-jxr-plugin.version>
+		<maven-project-info-reports-plugin.version>3.5.0</maven-project-info-reports-plugin.version>
+		<maven-resources.version>3.3.1</maven-resources.version>
+		<maven-site-plugin.version>4.0.0-M14</maven-site-plugin.version>
+		<maven-surefire.version>3.2.5</maven-surefire.version>
+		<maven-surefire-report-plugin.version>${maven-surefire.version}</maven-surefire-report-plugin.version>
+		<maven-toolchains-plugin.version>3.2.0</maven-toolchains-plugin.version>
+
+		<error-prone.version>2.27.1</error-prone.version>
+		<findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
+		<nullaway.version>0.10.26</nullaway.version>
+	</properties>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jxr-plugin</artifactId>
+					<version>${maven-jxr-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-project-info-reports-plugin</artifactId>
+					<version>${maven-project-info-reports-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${maven-site-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-report-plugin</artifactId>
+					<version>${maven-surefire-report-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-toolchains-plugin</artifactId>
+					<version>${maven-toolchains-plugin.version}</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<compilerArgs>
+						<!--
+							Treat all warnings as errors as proposed in https://github.com/google/error-prone/issues/424
+						-->
+						<arg>-Werror</arg>
+						<arg>-XDcompilePolicy=simple</arg>
+						<!--
+							For details about the standard bug patterns check:
+							- ErrorProne: https://errorprone.info/bugpatterns
+							- NullAway: https://github.com/uber/NullAway/wiki/Configuration
+							Syntax as described here: https://errorprone.info/docs/flags#maven
+							May not work on Windows on GitBash because of path conversion issues (Unix vs Windows)
+						-->
+						<arg>
+							-Xplugin:ErrorProne \
+							<!-- Recommended experimental errors. -->
+							-Xep:DeduplicateConstants \
+							-Xep:DepAnn \
+							-Xep:InsecureCryptoUsage \
+							-Xep:IterablePathParameter \
+							-Xep:LongLiteralLowerCaseSuffix \
+							-Xep:PackageLocation:ERROR \
+							-Xep:StaticQualifiedUsingExpression \
+							-Xep:SystemExitOutsideMain \
+							<!-- Recommended experimental warnings. -->
+							-Xep:AvoidObjectArrays \
+							-Xep:CatchingUnchecked \
+							-Xep:CheckedExceptionNotThrown \
+							-Xep:DifferentNameButSame \
+							-Xep:EqualsBrokenForNull \
+							-Xep:InitializeInline \
+							-Xep:InterfaceWithOnlyStatics \
+							-Xep:MissingDefault \
+							-Xep:PreferJavaTimeOverload \
+							-Xep:PreferredInterfaceType \
+							-Xep:RedundantThrows \
+							-Xep:StatementSwitchToExpressionSwitch \
+							-Xep:SystemOut \
+							-Xep:TimeUnitMismatch \
+							-Xep:UnnecessarilyFullyQualified \
+							-Xep:UnnecessarilyUsedValue \
+							-Xep:UnnecessarilyVisible \
+							-Xep:UnnecessaryAnonymousClass \
+							-Xep:UnnecessaryDefaultInEnumSwitch \
+							<!-- -Xep:UnnecessaryFinal \ -->
+							-Xep:UnnecessaryOptionalGet \
+							-Xep:UnusedException \
+							-Xep:Varifier \
+							-Xep:YodaCondition \
+							<!-- \
+								Recommended experimental suggestions.
+								Since these are typically reliable, the severity has been increased to WARN.
+							--> \
+							-Xep:FieldCanBeFinal:WARN \
+							-Xep:FieldCanBeLocal:WARN \
+							-Xep:FieldCanBeStatic:WARN \
+							-Xep:FieldMissingNullable:WARN \
+							-Xep:ParameterMissingNullable:WARN \
+							-Xep:PrivateConstructorForUtilityClass:WARN \
+							-Xep:RemoveUnusedImports:WARN \
+							-Xep:ReturnMissingNullable:WARN \
+							-Xep:ReturnsNullCollection:WARN \
+							-Xep:UseEnumSwitch:WARN \
+							<!-- Don't care about tests -->
+							-XepExcludedPaths:.*/src/test/.* \
+							<!-- Config for Nullaway --> \
+							<!-- See https://github.com/uber/NullAway/wiki/Configuration#annotated-packages -->
+							-XepOpt:NullAway:AnnotatedPackages=com.grottendieck \
+							<!--
+								Used to avoid having to explicitly initialize all Spring @Values fields.
+								@Autowired is already filtered by default by NullAway, but @Value isn't.
+							-->
+							-XepOpt:NullAway:ExcludedFieldAnnotations=org.springframework.beans.factory.annotation.Value
+						</arg>
+						<!--
+							Compiler options for Java >= 16 declared in a Maven Toolchains compatible fashion
+							See https://errorprone.info/docs/installation#maven
+						-->
+						<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
+						<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED</arg>
+						<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED</arg>
+						<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED</arg>
+						<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED</arg>
+						<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED</arg>
+						<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED</arg>
+						<arg>-J--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED</arg>
+						<arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED</arg>
+						<arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED</arg>
+					</compilerArgs>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>com.google.code.findbugs</groupId>
+							<artifactId>jsr305</artifactId>
+							<version>${findbugs-jsr305.version}</version>
+						</path>
+						<path>
+							<groupId>com.google.errorprone</groupId>
+							<artifactId>error_prone_core</artifactId>
+							<version>${error-prone.version}</version>
+						</path>
+						<path>
+							<groupId>com.uber.nullaway</groupId>
+							<artifactId>nullaway</artifactId>
+							<version>${nullaway.version}</version>
+						</path>
+					</annotationProcessorPaths>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<propertiesEncoding>${project.build.sourceEncoding}</propertiesEncoding>
+				</configuration>
+				<executions>
+					<execution>
+						<id>copy-license</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/classes/META-INF</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}</directory>
+									<includes>
+										<include>LICENSE</include>
+									</includes>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<parallel>classes</parallel>
+					<threadCount>10</threadCount>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-toolchains-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>toolchain</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<toolchains>
+						<jdk>
+							<version>${java.version}</version>
+						</jdk>
+					</toolchains>
+				</configuration>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jxr-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>index</report>
+							<report>dependencies</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-report-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>
