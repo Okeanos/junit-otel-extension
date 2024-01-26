@@ -1,0 +1,44 @@
+# See https://help.github.com/en/actions/automating-your-workflow-with-github-actions
+# See https://github.com/actions/setup-java
+name: CI
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  contents: read
+  issues: read
+  packages: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version-file: '.java-version'
+      - name: Cache maven artifacts
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2/repository
+          key: ${{ github.repository }}
+      - name: Build with Maven
+        env:
+          MAVEN_OPTS: -Dorg.slf4j.simpleLogger.defaultLogLevel=warn
+        run: |
+          cp -f .mvn/maven_ci.config .mvn/maven.config
+          mvn package
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          junit_files: target/surefire-reports/**/*.xml
