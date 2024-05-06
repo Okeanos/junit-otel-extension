@@ -119,7 +119,8 @@ Maven itself via the [Maven OpenTelemetry extension](https://github.com/open-tel
 
 Please note that you have to add `-javaagent:target/otelagent.jar -Dotel.javaagent.configuration-file=.mvn/otel.config`
 to the provided `.mvn/jvm.config` config after running e.g. `./mvnw compile -DskipTests` in order for the agent to be
-loaded.
+loaded during Maven invocation. Additionally, the `otel` Maven profile has to be manually activated. The `run.sh` shell
+script takes care of all of this.
 
 **Important:** Each time you clean the `target` folder you'll have to remove the `-javaagent` parameter from the
 `jvm.config` or else Maven will fail during startup!
