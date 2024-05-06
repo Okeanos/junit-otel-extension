@@ -18,6 +18,12 @@ import java.lang.reflect.Method;
 
 import static com.nikolasgrottendieck.junit.otel.PropagationHelper.getParentSpan;
 
+/**
+ * Handles Tracing in JUnit tests based around the Lifecycle methods described
+ * here: <a href="https://junit.org/junit5/docs/current/user-guide/#extensions-execution-order-overview">Extensions Execution Order</a>
+ * <p>
+ * Traces are created for classes that have either been annotated with {@link ObservedTests} or {@link org.junit.jupiter.api.extension.ExtendWith} referencing the {@link OpenTelemetryTracing} class directly.
+ */
 public class OpenTelemetryTracing implements
 	TestInstancePreConstructCallback,
 	InvocationInterceptor,

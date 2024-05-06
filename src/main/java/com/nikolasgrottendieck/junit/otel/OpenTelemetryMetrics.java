@@ -10,6 +10,9 @@ import org.junit.jupiter.api.extension.TestWatcher;
 
 import java.util.Optional;
 
+/**
+ * Creates Metrics based on the results of the JUnit tests executed that have either been annotated with {@link ObservedTests} or {@link org.junit.jupiter.api.extension.ExtendWith} referencing the {@link OpenTelemetryMetrics} class directly.
+ */
 public class OpenTelemetryMetrics implements TestWatcher {
 
 	public static final ExtensionContext.Namespace NAMESPACE = ExtensionContext.Namespace.create(Config.getMetricsNamespace());
