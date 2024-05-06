@@ -41,4 +41,12 @@ public final class Config {
 		return PROPERTIES.getProperty("metricsNamespace", "opentelemetry-metrics");
 	}
 
+	public static String getTracingNamespace() {
+		if (PROPERTIES.isEmpty() && !failedLoading) {
+			loadProperties();
+		}
+
+		return PROPERTIES.getProperty("tracingNamespace", "opentelemetry-tracing");
+	}
+
 }
