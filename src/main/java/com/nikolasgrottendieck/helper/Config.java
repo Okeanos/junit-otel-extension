@@ -25,12 +25,20 @@ public final class Config {
 		}
 	}
 
-	public static Properties getProperties() {
+	public static String getVersion() {
 		if (PROPERTIES.isEmpty() && !failedLoading) {
 			loadProperties();
 		}
 
-		return PROPERTIES;
+		return PROPERTIES.getProperty("instrumentationVersion", "0.0.1-SNAPSHOT");
+	}
+
+	public static String getMetricsNamespace() {
+		if (PROPERTIES.isEmpty() && !failedLoading) {
+			loadProperties();
+		}
+
+		return PROPERTIES.getProperty("metricsNamespace", "opentelemetry-metrics");
 	}
 
 }
