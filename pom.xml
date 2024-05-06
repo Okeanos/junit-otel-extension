@@ -56,6 +56,7 @@
 		<findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
 		<jspecify.version>0.3.0</jspecify.version>
 		<junit-jupiter.version>5.10.2</junit-jupiter.version>
+		<junit-testkit.version>1.10.2</junit-testkit.version>
 		<nullaway.version>0.10.26</nullaway.version>
 		<opentelemetry-bom.version>1.38.0</opentelemetry-bom.version>
 	</properties>
@@ -105,6 +106,12 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-testkit</artifactId>
+			<version>${junit-testkit.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
