@@ -2,6 +2,8 @@ package com.nikolasgrottendieck.junit.otel.tracing;
 
 import com.nikolasgrottendieck.helper.TestCase;
 import com.nikolasgrottendieck.junit.otel.OpenTelemetryTracing;
+import com.nikolasgrottendieck.junit.otel.SemConName;
+import com.nikolasgrottendieck.junit.otel.TestLifecycle;
 import io.opentelemetry.api.common.AttributeKey;
 import io.opentelemetry.sdk.testing.junit5.OpenTelemetryExtension;
 import org.junit.jupiter.api.Disabled;
@@ -44,15 +46,15 @@ class NamedTracingTest {
 					s -> s.hasName("Fancy Tracing Example Test Class")
 						.hasNoParent()
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.unique_id"),
+							AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 							uniqueId(NamedTracingTest.TracingExampleTestCase.class))
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.class"),
+							AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 							NamedTracingTest.TracingExampleTestCase.class.getCanonicalName()
 						)
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.lifecycle"),
-							"PRE_INSTANCE_CONSTRUCT"
+							AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+							TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 						),
 					s -> s.hasName("A succeeding Test")
 				),
@@ -61,15 +63,15 @@ class NamedTracingTest {
 					s -> s.hasName("Fancy Tracing Example Test Class")
 						.hasNoParent()
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.unique_id"),
+							AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 							uniqueId(NamedTracingTest.TracingExampleTestCase.class))
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.class"),
+							AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 							NamedTracingTest.TracingExampleTestCase.class.getCanonicalName()
 						)
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.lifecycle"),
-							"PRE_INSTANCE_CONSTRUCT"
+							AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+							TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 						),
 					s -> s.hasName("A failing test")
 				),
@@ -78,15 +80,15 @@ class NamedTracingTest {
 					s -> s.hasName("Fancy Tracing Example Test Class")
 						.hasNoParent()
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.unique_id"),
+							AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 							uniqueId(NamedTracingTest.TracingExampleTestCase.class))
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.class"),
+							AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 							NamedTracingTest.TracingExampleTestCase.class.getCanonicalName()
 						)
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.lifecycle"),
-							"PRE_INSTANCE_CONSTRUCT"
+							AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+							TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 						)
 				),
 			trace ->
@@ -94,15 +96,15 @@ class NamedTracingTest {
 					s -> s.hasName("Fancy Tracing Example Test Class")
 						.hasNoParent()
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.unique_id"),
+							AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 							uniqueId(NamedTracingTest.TracingExampleTestCase.class))
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.class"),
+							AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 							NamedTracingTest.TracingExampleTestCase.class.getCanonicalName()
 						)
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.lifecycle"),
-							"PRE_INSTANCE_CONSTRUCT"
+							AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+							TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 						),
 					s -> s.hasName("An aborted test")
 				),
@@ -111,15 +113,15 @@ class NamedTracingTest {
 					s -> s.hasName("Fancy Tracing Example Test Class")
 						.hasNoParent()
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.unique_id"),
+							AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 							uniqueId(NamedTracingTest.TracingExampleTestCase.class))
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.class"),
+							AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 							NamedTracingTest.TracingExampleTestCase.class.getCanonicalName()
 						)
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.lifecycle"),
-							"PRE_INSTANCE_CONSTRUCT"
+							AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+							TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 						),
 					s -> s.hasName("✅ Has an Emoji Name")
 				)

@@ -35,12 +35,12 @@ final class TracingHelper {
 		Span span = spanBuilder.setParent(otelContext).startSpan();
 		TestInstance.Lifecycle instanceLifecycle = extensionContext.getTestInstanceLifecycle().orElse(TestInstance.Lifecycle.PER_CLASS);
 
-		span.setAttribute("org.junit.test.lifecycle", lifecycle.name());
-		span.setAttribute("org.junit.test.instance_lifecycle", instanceLifecycle.name());
-		span.setAttribute("org.junit.test.unique_id", extensionContext.getUniqueId());
-		extensionContext.getTags().forEach(t -> span.setAttribute("org.junit.test.tag", t));
-		extensionContext.getTestClass().ifPresent(c -> span.setAttribute("org.junit.test.class", c.getCanonicalName()));
-		extensionContext.getTestMethod().ifPresent(m -> span.setAttribute("org.junit.test.method", m.getName()));
+		span.setAttribute(SemConName.LIFECYCLE.getOtelName(), lifecycle.name());
+		span.setAttribute(SemConName.INSTANCE_LIFECYCLE.getOtelName(), instanceLifecycle.name());
+		span.setAttribute(SemConName.UNIQUE_ID.getOtelName(), extensionContext.getUniqueId());
+		extensionContext.getTags().forEach(t -> span.setAttribute(SemConName.TAG.getOtelName(), t));
+		extensionContext.getTestClass().ifPresent(c -> span.setAttribute(SemConName.CLASS.getOtelName(), c.getCanonicalName()));
+		extensionContext.getTestMethod().ifPresent(m -> span.setAttribute(SemConName.METHOD.getOtelName(), m.getName()));
 
 		return span;
 	}
@@ -59,7 +59,7 @@ final class TracingHelper {
 		try (Scope scope = currentSpan.makeCurrent()) {
 			if (invocationContext != null && !invocationContext.getArguments().isEmpty()) {
 				currentSpan.setAllAttributes(Attributes.builder()
-					.put("org.junit.test.arguments",
+					.put(SemConName.ARGUMENTS.getOtelName(),
 						invocationContext.getArguments().stream()
 							.map(String::valueOf)
 							.toArray(String[]::new)
@@ -74,22 +74,22 @@ final class TracingHelper {
 			T returnValue = invocation.proceed();
 
 			if (lifecycle == TestLifecycle.TEST_EXECUTION) {
-				currentSpan.setAttribute("org.junit.test.result", "SUCCESSFUL");
+				currentSpan.setAttribute(SemConName.RESULT.getOtelName(), TestResult.SUCCESSFUL.name());
 				currentSpan.setStatus(StatusCode.OK);
 			}
 			return returnValue;
 		} catch (Throwable e) {
 			if (e instanceof TestAbortedException) {
-				currentSpan.setAttribute("org.junit.test.result", "ABORTED");
+				currentSpan.setAttribute(SemConName.RESULT.getOtelName(), TestResult.ABORTED.name());
 				currentSpan.setStatus(StatusCode.UNSET);
 			} else if (e instanceof TestSkippedException) {
-				currentSpan.setAttribute("org.junit.test.result", "SKIPPED");
+				currentSpan.setAttribute(SemConName.RESULT.getOtelName(), TestResult.SKIPPED.name());
 				currentSpan.setStatus(StatusCode.UNSET);
 			} else {
-				currentSpan.setAttribute("org.junit.test.result", "FAILED");
+				currentSpan.setAttribute(SemConName.RESULT.getOtelName(), TestResult.FAILED.name());
 				currentSpan.setStatus(StatusCode.ERROR);
 			}
-			currentSpan.setAttribute("org.junit.test.result.reason", e.getMessage());
+			currentSpan.setAttribute(SemConName.RESULT_REASON.getOtelName(), e.getMessage());
 			currentSpan.recordException(e);
 			throw e;
 		} finally {

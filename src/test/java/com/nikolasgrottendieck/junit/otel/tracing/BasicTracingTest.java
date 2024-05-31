@@ -2,6 +2,9 @@ package com.nikolasgrottendieck.junit.otel.tracing;
 
 import com.nikolasgrottendieck.helper.TestCase;
 import com.nikolasgrottendieck.junit.otel.OpenTelemetryTracing;
+import com.nikolasgrottendieck.junit.otel.SemConName;
+import com.nikolasgrottendieck.junit.otel.TestLifecycle;
+import com.nikolasgrottendieck.junit.otel.TestResult;
 import io.opentelemetry.api.common.AttributeKey;
 import io.opentelemetry.sdk.testing.junit5.OpenTelemetryExtension;
 import io.opentelemetry.sdk.trace.data.StatusData;
@@ -45,78 +48,78 @@ class BasicTracingTest {
 						s -> s.hasName("BasicTracingTest$TracingPerClassExampleTestCase")
 							.hasNoParent()
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.unique_id"),
+								AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 								uniqueId(BasicTracingTest.TracingPerClassExampleTestCase.class))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.class"),
+								AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 								BasicTracingTest.TracingPerClassExampleTestCase.class.getCanonicalName()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.lifecycle"),
-								"PRE_INSTANCE_CONSTRUCT"
+								AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+								TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 							),
 						s -> s.hasName("succeedingTest()")
 							.hasParentSpanId(trace.getSpan(0).getSpanId())
 							.hasParent(trace.getSpan(0))
 							.hasStatus(StatusData.ok())
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.unique_id"),
+								AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 								uniqueId(BasicTracingTest.TracingPerClassExampleTestCase.class, "succeedingTest()"))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.class"),
+								AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 								BasicTracingTest.TracingPerClassExampleTestCase.class.getCanonicalName()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.lifecycle"),
-								"TEST_EXECUTION"
+								AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+								TestLifecycle.TEST_EXECUTION.name()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.result"),
-								"SUCCESSFUL"
+								AttributeKey.stringKey(SemConName.RESULT.getOtelName()),
+								TestResult.SUCCESSFUL.name()
 							),
 						s -> s.hasName("failingTest()")
 							.hasParentSpanId(trace.getSpan(0).getSpanId())
 							.hasParent(trace.getSpan(0))
 							.hasStatus(StatusData.error())
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.unique_id"),
+								AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 								uniqueId(BasicTracingTest.TracingPerClassExampleTestCase.class, "failingTest()"))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.class"),
+								AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 								BasicTracingTest.TracingPerClassExampleTestCase.class.getCanonicalName()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.lifecycle"),
-								"TEST_EXECUTION"
+								AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+								TestLifecycle.TEST_EXECUTION.name()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.result"),
-								"FAILED"
+								AttributeKey.stringKey(SemConName.RESULT.getOtelName()),
+								TestResult.FAILED.name()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.result.reason"),
+								AttributeKey.stringKey(SemConName.RESULT_REASON.getOtelName()),
 								"failed on purpose"
 							),
 						s -> s.hasName("abortedTest()")
 							.hasParentSpanId(trace.getSpan(0).getSpanId())
 							.hasParent(trace.getSpan(0))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.unique_id"),
+								AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 								uniqueId(BasicTracingTest.TracingPerClassExampleTestCase.class, "abortedTest()"))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.class"),
+								AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 								BasicTracingTest.TracingPerClassExampleTestCase.class.getCanonicalName()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.lifecycle"),
-								"TEST_EXECUTION"
+								AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+								TestLifecycle.TEST_EXECUTION.name()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.result"),
-								"ABORTED"
+								AttributeKey.stringKey(SemConName.RESULT.getOtelName()),
+								TestResult.ABORTED.name()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.result.reason"),
+								AttributeKey.stringKey(SemConName.RESULT_REASON.getOtelName()),
 								"Assumption failed: abc does not contain Z"
 							)
 					)
@@ -147,34 +150,34 @@ class BasicTracingTest {
 						s -> s.hasName("BasicTracingTest$TracingPerMethodExampleTestCase")
 							.hasNoParent()
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.unique_id"),
+								AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 								uniqueId(BasicTracingTest.TracingPerMethodExampleTestCase.class))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.class"),
+								AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 								BasicTracingTest.TracingPerMethodExampleTestCase.class.getCanonicalName()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.lifecycle"),
-								"PRE_INSTANCE_CONSTRUCT"
+								AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+								TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 							),
 						s -> s.hasName("succeedingTest()")
 							.hasParentSpanId(trace.getSpan(0).getSpanId())
 							.hasParent(trace.getSpan(0))
 							.hasStatus(StatusData.ok())
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.unique_id"),
+								AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 								uniqueId(BasicTracingTest.TracingPerMethodExampleTestCase.class, "succeedingTest()"))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.class"),
+								AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 								BasicTracingTest.TracingPerMethodExampleTestCase.class.getCanonicalName()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.lifecycle"),
-								"TEST_EXECUTION"
+								AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+								TestLifecycle.TEST_EXECUTION.name()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.result"),
-								"SUCCESSFUL"
+								AttributeKey.stringKey(SemConName.RESULT.getOtelName()),
+								TestResult.SUCCESSFUL.name()
 							)
 					)
 					.first()
@@ -184,37 +187,37 @@ class BasicTracingTest {
 						s -> s.hasName("BasicTracingTest$TracingPerMethodExampleTestCase")
 							.hasNoParent()
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.unique_id"),
+								AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 								uniqueId(BasicTracingTest.TracingPerMethodExampleTestCase.class))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.class"),
+								AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 								BasicTracingTest.TracingPerMethodExampleTestCase.class.getCanonicalName()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.lifecycle"),
-								"PRE_INSTANCE_CONSTRUCT"
+								AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+								TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 							),
 						s -> s.hasName("failingTest()")
 							.hasParentSpanId(trace.getSpan(0).getSpanId())
 							.hasParent(trace.getSpan(0))
 							.hasStatus(StatusData.error())
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.unique_id"),
+								AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 								uniqueId(BasicTracingTest.TracingPerMethodExampleTestCase.class, "failingTest()"))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.class"),
+								AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 								BasicTracingTest.TracingPerMethodExampleTestCase.class.getCanonicalName()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.lifecycle"),
-								"TEST_EXECUTION"
+								AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+								TestLifecycle.TEST_EXECUTION.name()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.result"),
-								"FAILED"
+								AttributeKey.stringKey(SemConName.RESULT.getOtelName()),
+								TestResult.FAILED.name()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.result.reason"),
+								AttributeKey.stringKey(SemConName.RESULT_REASON.getOtelName()),
 								"failed on purpose"
 							)
 					)
@@ -225,15 +228,15 @@ class BasicTracingTest {
 						s -> s.hasName("BasicTracingTest$TracingPerMethodExampleTestCase")
 							.hasNoParent()
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.unique_id"),
+								AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 								uniqueId(BasicTracingTest.TracingPerMethodExampleTestCase.class))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.class"),
+								AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 								BasicTracingTest.TracingPerMethodExampleTestCase.class.getCanonicalName()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.lifecycle"),
-								"PRE_INSTANCE_CONSTRUCT"
+								AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+								TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 							)
 					)
 					.first()
@@ -243,36 +246,36 @@ class BasicTracingTest {
 						s -> s.hasName("BasicTracingTest$TracingPerMethodExampleTestCase")
 							.hasNoParent()
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.unique_id"),
+								AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 								uniqueId(BasicTracingTest.TracingPerMethodExampleTestCase.class))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.class"),
+								AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 								BasicTracingTest.TracingPerMethodExampleTestCase.class.getCanonicalName()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.lifecycle"),
-								"PRE_INSTANCE_CONSTRUCT"
+								AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+								TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 							),
 						s -> s.hasName("abortedTest()")
 							.hasParentSpanId(trace.getSpan(0).getSpanId())
 							.hasParent(trace.getSpan(0))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.unique_id"),
+								AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 								uniqueId(BasicTracingTest.TracingPerMethodExampleTestCase.class, "abortedTest()"))
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.class"),
+								AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 								BasicTracingTest.TracingPerMethodExampleTestCase.class.getCanonicalName()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.lifecycle"),
-								"TEST_EXECUTION"
+								AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+								TestLifecycle.TEST_EXECUTION.name()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.result"),
-								"ABORTED"
+								AttributeKey.stringKey(SemConName.RESULT.getOtelName()),
+								TestResult.ABORTED.name()
 							)
 							.hasAttribute(
-								AttributeKey.stringKey("org.junit.test.result.reason"),
+								AttributeKey.stringKey(SemConName.RESULT_REASON.getOtelName()),
 								"Assumption failed: abc does not contain Z"
 							)
 					)

@@ -23,28 +23,28 @@ public class OpenTelemetryMetrics implements TestWatcher {
 		.setInstrumentationVersion(Config.getVersion())
 		.build();
 
-	private final LongCounter testCounter = meter.counterBuilder("org.junit.test.counter")
-		.setDescription("Counts the number of tests")
+	private final LongCounter testCounter = meter.counterBuilder(SemConName.TEST_COUNTER.getOtelName())
+		.setDescription(SemConName.TEST_COUNTER.getDescription())
 		.setUnit("Test")
 		.build();
 
-	private final LongCounter disabledCounter = meter.counterBuilder("org.junit.test.disabled")
-		.setDescription("Counts the number of disabled tests")
+	private final LongCounter disabledCounter = meter.counterBuilder(SemConName.TEST_DISABLED_COUNTER.getOtelName())
+		.setDescription(SemConName.TEST_DISABLED_COUNTER.getDescription())
 		.setUnit("Test")
 		.build();
 
-	private final LongCounter successCounter = meter.counterBuilder("org.junit.test.successful")
-		.setDescription("Counts the number of successful tests")
+	private final LongCounter successCounter = meter.counterBuilder(SemConName.TEST_SUCCESS_COUNTER.getOtelName())
+		.setDescription(SemConName.TEST_SUCCESS_COUNTER.getDescription())
 		.setUnit("Test")
 		.build();
 
-	private final LongCounter failureCounter = meter.counterBuilder("org.junit.test.failed")
-		.setDescription("Counts the number of failed tests")
+	private final LongCounter failureCounter = meter.counterBuilder(SemConName.TEST_FAILURE_COUNTER.getOtelName())
+		.setDescription(SemConName.TEST_FAILURE_COUNTER.getDescription())
 		.setUnit("Test")
 		.build();
 
-	private final LongCounter abortCounter = meter.counterBuilder("org.junit.test.aborted")
-		.setDescription("Counts the number of aborted tests")
+	private final LongCounter abortCounter = meter.counterBuilder(SemConName.TEST_ABORT_COUNTER.getOtelName())
+		.setDescription(SemConName.TEST_ABORT_COUNTER.getDescription())
 		.setUnit("Test")
 		.build();
 

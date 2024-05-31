@@ -2,6 +2,7 @@ package com.nikolasgrottendieck.junit.otel.metrics;
 
 import com.nikolasgrottendieck.helper.TestCase;
 import com.nikolasgrottendieck.junit.otel.OpenTelemetryMetrics;
+import com.nikolasgrottendieck.junit.otel.SemConName;
 import io.opentelemetry.sdk.testing.assertj.OpenTelemetryAssertions;
 import io.opentelemetry.sdk.testing.junit5.OpenTelemetryExtension;
 import org.junit.jupiter.api.Disabled;
@@ -42,35 +43,35 @@ class BasicMetricsTest {
 			.satisfiesExactlyInAnyOrder(
 				metricData ->
 					OpenTelemetryAssertions.assertThat(metricData)
-						.hasName("org.junit.test.aborted")
+						.hasName(SemConName.TEST_ABORT_COUNTER.getOtelName())
 						.hasLongSumSatisfying(
 							sum -> sum.hasPointsSatisfying(point -> point.hasValue(1)
 							)
 						),
 				metricData ->
 					OpenTelemetryAssertions.assertThat(metricData)
-						.hasName("org.junit.test.counter")
+						.hasName(SemConName.TEST_COUNTER.getOtelName())
 						.hasLongSumSatisfying(
 							sum -> sum.hasPointsSatisfying(point -> point.hasValue(4)
 							)
 						),
 				metricData ->
 					OpenTelemetryAssertions.assertThat(metricData)
-						.hasName("org.junit.test.disabled")
+						.hasName(SemConName.TEST_DISABLED_COUNTER.getOtelName())
 						.hasLongSumSatisfying(
 							sum -> sum.hasPointsSatisfying(point -> point.hasValue(1)
 							)
 						),
 				metricData ->
 					OpenTelemetryAssertions.assertThat(metricData)
-						.hasName("org.junit.test.failed")
+						.hasName(SemConName.TEST_FAILURE_COUNTER.getOtelName())
 						.hasLongSumSatisfying(
 							sum -> sum.hasPointsSatisfying(point -> point.hasValue(1)
 							)
 						),
 				metricData ->
 					OpenTelemetryAssertions.assertThat(metricData)
-						.hasName("org.junit.test.successful")
+						.hasName(SemConName.TEST_SUCCESS_COUNTER.getOtelName())
 						.hasLongSumSatisfying(
 							sum -> sum.hasPointsSatisfying(point -> point.hasValue(1)
 							)

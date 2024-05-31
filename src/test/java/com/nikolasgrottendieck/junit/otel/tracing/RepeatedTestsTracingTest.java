@@ -2,6 +2,8 @@ package com.nikolasgrottendieck.junit.otel.tracing;
 
 import com.nikolasgrottendieck.helper.TestCase;
 import com.nikolasgrottendieck.junit.otel.OpenTelemetryTracing;
+import com.nikolasgrottendieck.junit.otel.SemConName;
+import com.nikolasgrottendieck.junit.otel.TestLifecycle;
 import io.opentelemetry.api.common.AttributeKey;
 import io.opentelemetry.sdk.testing.junit5.OpenTelemetryExtension;
 import org.junit.jupiter.api.RepeatedTest;
@@ -39,15 +41,15 @@ class RepeatedTestsTracingTest {
 					s -> s.hasName("RepeatedTestsTracingTest$TracingExampleTestCase")
 						.hasNoParent()
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.unique_id"),
+							AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 							uniqueId(RepeatedTestsTracingTest.TracingExampleTestCase.class))
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.class"),
+							AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 							RepeatedTestsTracingTest.TracingExampleTestCase.class.getCanonicalName()
 						)
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.lifecycle"),
-							"PRE_INSTANCE_CONSTRUCT"
+							AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+							TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 						)
 				),
 			trace ->
@@ -55,15 +57,15 @@ class RepeatedTestsTracingTest {
 					s -> s.hasName("RepeatedTestsTracingTest$TracingExampleTestCase")
 						.hasNoParent()
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.unique_id"),
+							AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 							uniqueId(RepeatedTestsTracingTest.TracingExampleTestCase.class))
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.class"),
+							AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 							RepeatedTestsTracingTest.TracingExampleTestCase.class.getCanonicalName()
 						)
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.lifecycle"),
-							"PRE_INSTANCE_CONSTRUCT"
+							AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+							TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 						)
 				)
 		);

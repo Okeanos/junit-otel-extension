@@ -2,6 +2,8 @@ package com.nikolasgrottendieck.junit.otel.tracing;
 
 import com.nikolasgrottendieck.helper.TestCase;
 import com.nikolasgrottendieck.junit.otel.OpenTelemetryTracing;
+import com.nikolasgrottendieck.junit.otel.SemConName;
+import com.nikolasgrottendieck.junit.otel.TestLifecycle;
 import io.opentelemetry.api.common.AttributeKey;
 import io.opentelemetry.sdk.testing.junit5.OpenTelemetryExtension;
 import org.junit.jupiter.api.Test;
@@ -40,15 +42,15 @@ class TimeoutTracingTest {
 					s -> s.hasName("TimeoutTracingTest$TracingExampleTestCase")
 						.hasNoParent()
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.unique_id"),
+							AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 							uniqueId(TimeoutTracingTest.TracingExampleTestCase.class))
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.class"),
+							AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 							TimeoutTracingTest.TracingExampleTestCase.class.getCanonicalName()
 						)
 						.hasAttribute(
-							AttributeKey.stringKey("org.junit.test.lifecycle"),
-							"PRE_INSTANCE_CONSTRUCT"
+							AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+							TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 						),
 					s -> s.hasName("timeoutTest()")
 				),
@@ -56,15 +58,15 @@ class TimeoutTracingTest {
 				s -> s.hasName("TimeoutTracingTest$TracingExampleTestCase")
 					.hasNoParent()
 					.hasAttribute(
-						AttributeKey.stringKey("org.junit.test.unique_id"),
+						AttributeKey.stringKey(SemConName.UNIQUE_ID.getOtelName()),
 						uniqueId(TimeoutTracingTest.TracingExampleTestCase.class))
 					.hasAttribute(
-						AttributeKey.stringKey("org.junit.test.class"),
+						AttributeKey.stringKey(SemConName.CLASS.getOtelName()),
 						TimeoutTracingTest.TracingExampleTestCase.class.getCanonicalName()
 					)
 					.hasAttribute(
-						AttributeKey.stringKey("org.junit.test.lifecycle"),
-						"PRE_INSTANCE_CONSTRUCT"
+						AttributeKey.stringKey(SemConName.LIFECYCLE.getOtelName()),
+						TestLifecycle.PRE_INSTANCE_CONSTRUCT.name()
 					),
 				s -> s.hasName("timeoutInSeparateThread()")
 			)
