@@ -57,6 +57,7 @@
 		<findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
 		<jspecify.version>0.3.0</jspecify.version>
 		<junit-jupiter.version>5.10.2</junit-jupiter.version>
+		<junit-pioneer.version>2.2.0</junit-pioneer.version>
 		<junit-testkit.version>1.10.2</junit-testkit.version>
 		<nullaway.version>0.10.26</nullaway.version>
 		<opentelemetry-bom.version>1.38.0</opentelemetry-bom.version>
@@ -125,6 +126,12 @@
 			<groupId>org.junit.platform</groupId>
 			<artifactId>junit-platform-testkit</artifactId>
 			<version>${junit-testkit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit-pioneer</groupId>
+			<artifactId>junit-pioneer</artifactId>
+			<version>${junit-pioneer.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -322,6 +329,10 @@
 				<configuration>
 					<parallel>classes</parallel>
 					<threadCount>10</threadCount>
+					<argLine>
+						--add-opens java.base/java.util=ALL-UNNAMED
+						--add-opens java.base/java.lang=ALL-UNNAMED
+					</argLine>
 				</configuration>
 			</plugin>
 			<plugin>

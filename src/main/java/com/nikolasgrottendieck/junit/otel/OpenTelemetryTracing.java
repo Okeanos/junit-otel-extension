@@ -5,7 +5,6 @@ import io.opentelemetry.api.GlobalOpenTelemetry;
 import io.opentelemetry.api.OpenTelemetry;
 import io.opentelemetry.api.trace.Span;
 import io.opentelemetry.api.trace.Tracer;
-import io.opentelemetry.context.Context;
 import io.opentelemetry.context.Scope;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.InvocationInterceptor;
@@ -16,7 +15,7 @@ import org.junit.jupiter.api.extension.TestInstancePreDestroyCallback;
 
 import java.lang.reflect.Method;
 
-import static com.nikolasgrottendieck.junit.otel.PropagationHelper.getParentSpan;
+import static com.nikolasgrottendieck.junit.otel.PropagationHelper.getOutsideContext;
 
 /**
  * Handles Tracing in JUnit tests based around the Lifecycle methods described
@@ -39,15 +38,8 @@ public class OpenTelemetryTracing implements
 	@SuppressWarnings("MustBeClosedChecker")
 	@Override
 	public void preConstructTestInstance(final TestInstanceFactoryContext factoryContext, final ExtensionContext context) {
-		Span parentSpan = getParentSpan(TestLifecycle.PRE_INSTANCE_CONSTRUCT, context);
-		Context otelContext = null;
-
-		if (parentSpan != null) {
-			otelContext = Context.current().with(parentSpan);
-		}
-
 		Span span = TracingHelper.startSpan(
-			otelContext,
+			getOutsideContext(openTelemetry),
 			context,
 			TestLifecycle.PRE_INSTANCE_CONSTRUCT,
 			tracer
