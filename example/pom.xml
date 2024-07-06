@@ -40,19 +40,19 @@
 		<maven.compiler.encoding>${project.build.sourceEncoding}</maven.compiler.encoding>
 
 		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-		<maven-dependency.version>3.6.1</maven-dependency.version>
-		<maven-surefire.version>3.2.5</maven-surefire.version>
+		<maven-dependency.version>3.7.1</maven-dependency.version>
+		<maven-surefire.version>3.3.0</maven-surefire.version>
 		<maven-surefire-report-plugin.version>${maven-surefire.version}</maven-surefire-report-plugin.version>
 		<maven-toolchains-plugin.version>3.2.0</maven-toolchains-plugin.version>
 
 		<junit-otel-extension.version>0.0.1-SNAPSHOT</junit-otel-extension.version>
 
 		<httpclient.version>5.3.1</httpclient.version>
-		<junit-jupiter.version>5.10.2</junit-jupiter.version>
+		<junit-jupiter.version>5.10.3</junit-jupiter.version>
 		<logback.version>1.5.6</logback.version>
-		<opentelemetry-agent.version>2.4.0</opentelemetry-agent.version>
-		<opentelemetry-bom.version>1.38.0</opentelemetry-bom.version>
-		<opentelemetry-logback-appender-1.0.version>2.4.0-alpha</opentelemetry-logback-appender-1.0.version>
+		<opentelemetry-agent.version>2.5.0</opentelemetry-agent.version>
+		<opentelemetry-bom.version>1.40.0</opentelemetry-bom.version>
+		<opentelemetry-logback-appender-1.0.version>2.5.0-alpha</opentelemetry-logback-appender-1.0.version>
 		<opentelemetry-maven-extension.version>1.36.0-alpha</opentelemetry-maven-extension.version>
 		<slf4j.version>2.0.13</slf4j.version>
 		<wiremock.version>3.6.0</wiremock.version>
