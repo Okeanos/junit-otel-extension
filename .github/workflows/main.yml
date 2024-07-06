@@ -29,8 +29,12 @@ jobs:
       - name: Cache maven artifacts
         uses: actions/cache@v4
         with:
-          path: ~/.m2/repository
-          key: ${{ github.repository }}
+          path: |
+            ~/.m2/repository
+            ~/.m2/wrapper
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - name: Build with Maven
         env:
           MAVEN_OPTS: -Dorg.slf4j.simpleLogger.defaultLogLevel=warn
