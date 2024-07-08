@@ -55,7 +55,7 @@
 		<opentelemetry-logback-appender-1.0.version>2.5.0-alpha</opentelemetry-logback-appender-1.0.version>
 		<opentelemetry-maven-extension.version>1.36.0-alpha</opentelemetry-maven-extension.version>
 		<slf4j.version>2.0.13</slf4j.version>
-		<wiremock.version>3.6.0</wiremock.version>
+		<wiremock.version>3.8.0</wiremock.version>
 	</properties>
 
 	<dependencyManagement>
