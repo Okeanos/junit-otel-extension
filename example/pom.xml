@@ -50,12 +50,12 @@
 		<httpclient.version>5.3.1</httpclient.version>
 		<junit-jupiter.version>5.10.3</junit-jupiter.version>
 		<logback.version>1.5.6</logback.version>
-		<opentelemetry-agent.version>2.5.0</opentelemetry-agent.version>
+		<opentelemetry-agent.version>2.6.0</opentelemetry-agent.version>
 		<opentelemetry-bom.version>1.40.0</opentelemetry-bom.version>
 		<opentelemetry-logback-appender-1.0.version>2.5.0-alpha</opentelemetry-logback-appender-1.0.version>
 		<opentelemetry-maven-extension.version>1.36.0-alpha</opentelemetry-maven-extension.version>
 		<slf4j.version>2.0.13</slf4j.version>
-		<wiremock.version>3.8.0</wiremock.version>
+		<wiremock.version>3.9.0</wiremock.version>
 	</properties>
 
 	<dependencyManagement>
