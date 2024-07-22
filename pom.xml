@@ -55,7 +55,7 @@
 		<assertj.version>3.26.3</assertj.version>
 		<error-prone.version>2.28.0</error-prone.version>
 		<findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
-		<jspecify.version>0.3.0</jspecify.version>
+		<jspecify.version>1.0.0</jspecify.version>
 		<junit-jupiter.version>5.10.3</junit-jupiter.version>
 		<junit-pioneer.version>2.2.0</junit-pioneer.version>
 		<junit-testkit.version>1.10.3</junit-testkit.version>
