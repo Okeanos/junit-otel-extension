@@ -1,9 +1,8 @@
 # JUnit5 Extension to observe tests with OpenTelemetry
 
-This [JUnit5](https://junit.org/) extension provides basic (and incomplete) tracing and metrics based on
-[OpenTelemetry](https://opentelemetry.io/).
+This [JUnit5](https://junit.org/) extension provides basic (and incomplete) tracing and metrics based on [OpenTelemetry](https://opentelemetry.io/).
 
-It has been inspired by the [Dynatrace/junit-jupiter-open-telemetry-extension](https://github.com/dynatrace-oss/junit-jupiter-open-telemetry-extension) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+It has been inspired by the [Dynatrace/junit-jupiter-open-telemetry-extension](https://github.com/dynatrace-oss/junit-jupiter-open-telemetry-extension)
 project.
 
 ## Usage
@@ -25,7 +24,7 @@ You can then use it by adding the following dependency to your project:
 </dependency>
 ```
 
-Alternatively, you can use the prebuilt release from GitHub Packages by providing the [necessary authentication information](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#authenticating-to-github-packages). <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+Alternatively, you can use the prebuilt release from GitHub Packages by providing the [necessary authentication information](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry#authenticating-to-github-packages).
 
 Now annotate your tests with one of the following options:
 
@@ -115,7 +114,7 @@ details.
 ## Example
 
 There is an example implementation in the `example` directory. A `run.sh` is included in case you want to instrument
-Maven itself via the [Maven OpenTelemetry extension](https://github.com/open-telemetry/opentelemetry-java-contrib/tree/main/maven-extension). <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+Maven itself via the [Maven OpenTelemetry extension](https://github.com/open-telemetry/opentelemetry-java-contrib/tree/main/maven-extension).
 
 Please note that you have to add `-javaagent:target/otelagent.jar -Dotel.javaagent.configuration-file=.mvn/otel.config`
 to the provided `.mvn/jvm.config` config after running e.g. `./mvnw compile -DskipTests` in order for the agent to be
@@ -129,9 +128,9 @@ After you can just invoke `./mvnw test` to generate traces and metrics from the 
 
 ## OpenTelemetry Collectors
 
-You can use [SigNoz](https://signoz.io), [HyperDX](https://www.hyperdx.io), [OpenTelemetry Demo](https://opentelemetry.io/docs/demo/) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+You can use [SigNoz](https://signoz.io), [HyperDX](https://www.hyperdx.io), [OpenTelemetry Demo](https://opentelemetry.io/docs/demo/)
 or any other consumer capable of processing OpenTelemetry data to visualize the results. If you are just interested in
-the traces (and not the metrics) you can also use [otel-desktop-viewer](https://github.com/CtrlSpice/otel-desktop-viewer). <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+the traces (and not the metrics) you can also use [otel-desktop-viewer](https://github.com/CtrlSpice/otel-desktop-viewer).
 
 ## Traces & Metrics
 
@@ -159,7 +158,7 @@ But also some more possibly non-obvious things that may also influence trace and
 
 ### Designing Trace Integration
 
-JUnit has so-called [Test Lifecycle Callbacks](https://junit.org/junit5/docs/current/user-guide/#extensions-lifecycle-callbacks) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+JUnit has so-called [Test Lifecycle Callbacks](https://junit.org/junit5/docs/current/user-guide/#extensions-lifecycle-callbacks)
 that we can use for tracing. The general flow looks like this:
 
 ```mermaid
@@ -176,7 +175,7 @@ stateDiagram-v2
     AfterAllCallback --> [*]
 ```
 
-To be taken into account are, of course, also the [general definitions](https://junit.org/junit5/docs/current/user-guide/#writing-tests-definitions) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+To be taken into account are, of course, also the [general definitions](https://junit.org/junit5/docs/current/user-guide/#writing-tests-definitions)
 and additional bits and pieces that go into the overall integration of tracing tests to facilitate
 accurate representation and information gathering.
 
@@ -203,7 +202,7 @@ for our tests.
 
 ### Designing Metrics Integration
 
-For metrics the overall design for _simple_ metrics is very straightforward via the dedicated [Test Result Processing](https://junit.org/junit5/docs/current/user-guide/#extensions-test-result-processing) <!-- markdownlint-disable-line MD013 --> <!-- editorconfig-checker-disable-line -->
+For metrics the overall design for _simple_ metrics is very straightforward via the dedicated [Test Result Processing](https://junit.org/junit5/docs/current/user-guide/#extensions-test-result-processing)
 interfaces that allow for simple counters such as:
 
 - over all test count

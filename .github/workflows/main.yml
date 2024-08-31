@@ -1,5 +1,5 @@
-# See https://help.github.com/en/actions/automating-your-workflow-with-github-actions
-# See https://github.com/actions/setup-java
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+# https://docs.github.com/en/actions/writing-workflows
 name: CI
 
 # yamllint disable-line rule:truthy
@@ -21,11 +21,16 @@ jobs:
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
+      - name: Extract Tool Versions
+        id: tool-versions
+        run: |
+          java_version=$(grep -F 'java' .mise.toml | cut -d '=' -f2 | xargs)
+          echo "java_version=${java_version}" >> "$GITHUB_OUTPUT"
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version-file: '.java-version'
+          java-version: ${{ steps.tool-versions.outputs.java_version }}
       - name: Cache maven artifacts
         uses: actions/cache@v4
         with:
