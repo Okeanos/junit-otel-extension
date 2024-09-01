@@ -38,7 +38,9 @@
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<maven.compiler.release>${java.version}</maven.compiler.release>
 		<maven.compiler.encoding>${project.build.sourceEncoding}</maven.compiler.encoding>
+		<toolchain.jdk.version>[${java.version},${parsedVersion.nextMajorVersion})</toolchain.jdk.version>
 
+		<build-helper-maven-plugin.version>3.6.0</build-helper-maven-plugin.version>
 		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
 		<maven-dependency.version>3.7.1</maven-dependency.version>
 		<maven-surefire.version>3.3.1</maven-surefire.version>
@@ -156,14 +158,45 @@
 					<artifactId>maven-toolchains-plugin</artifactId>
 					<version>${maven-toolchains-plugin.version}</version>
 				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>build-helper-maven-plugin</artifactId>
+					<version>${build-helper-maven-plugin.version}</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 
 		<plugins>
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>parse-version</goal>
+						</goals>
+						<configuration>
+							<versionString>${java.version}</versionString>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-toolchains-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>select-jdk-toolchain</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
+					<fork>true</fork>
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
@@ -198,25 +231,6 @@
 					<parallel>classes</parallel>
 					<threadCount>10</threadCount>
 					<argLine>-javaagent:${project.build.directory}/otelagent.jar -Dotel.service.name="${project.name}"</argLine>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-toolchains-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>toolchain</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<toolchains>
-						<jdk>
-							<version>${java.version}</version>
-						</jdk>
-					</toolchains>
 				</configuration>
 			</plugin>
 		</plugins>
