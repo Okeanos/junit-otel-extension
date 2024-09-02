@@ -24,7 +24,7 @@ jobs:
       - name: Extract Tool Versions
         id: tool-versions
         run: |
-          java_version=$(grep -F 'java' .mise.toml | cut -d '=' -f2 | xargs)
+          java_version=$(grep -F 'java' .mise.toml | cut -d '=' -f2 | xargs | cut -d '.' -f1)
           echo "java_version=${java_version}" >> "$GITHUB_OUTPUT"
       - name: Set up JDK
         uses: actions/setup-java@v4
