@@ -43,14 +43,14 @@
 		<build-helper-maven-plugin.version>3.6.0</build-helper-maven-plugin.version>
 		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
 		<maven-dependency.version>3.8.0</maven-dependency.version>
-		<maven-surefire.version>3.5.0</maven-surefire.version>
+		<maven-surefire.version>3.5.1</maven-surefire.version>
 		<maven-surefire-report-plugin.version>${maven-surefire.version}</maven-surefire-report-plugin.version>
 		<maven-toolchains-plugin.version>3.2.0</maven-toolchains-plugin.version>
 
 		<junit-otel-extension.version>0.0.1-SNAPSHOT</junit-otel-extension.version>
 
 		<httpclient.version>5.4</httpclient.version>
-		<junit-jupiter.version>5.11.1</junit-jupiter.version>
+		<junit-jupiter.version>5.11.2</junit-jupiter.version>
 		<logback.version>1.5.8</logback.version>
 		<opentelemetry-agent.version>2.8.0</opentelemetry-agent.version>
 		<opentelemetry-bom.version>1.42.1</opentelemetry-bom.version>
