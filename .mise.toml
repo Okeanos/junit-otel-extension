@@ -11,6 +11,6 @@
 	java = "17"
 	markdownlint-cli2 = "0.13.0"
 	shellcheck = "0.10.0"
-	shfmt = "3.9.0"
+	shfmt = "3.10.0"
 	taplo = "0.9.3"
 	yamllint = "1.35.1"
