@@ -46,8 +46,8 @@
 
 		<build-helper-maven-plugin.version>3.6.0</build-helper-maven-plugin.version>
 		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
-		<maven-jxr-plugin.version>3.5.0</maven-jxr-plugin.version>
-		<maven-project-info-reports-plugin.version>3.7.0</maven-project-info-reports-plugin.version>
+		<maven-jxr-plugin.version>3.6.0</maven-jxr-plugin.version>
+		<maven-project-info-reports-plugin.version>3.8.0</maven-project-info-reports-plugin.version>
 		<maven-resources.version>3.3.1</maven-resources.version>
 		<maven-site-plugin.version>4.0.0-M16</maven-site-plugin.version>
 		<maven-surefire.version>3.5.1</maven-surefire.version>
@@ -55,12 +55,12 @@
 		<maven-toolchains-plugin.version>3.2.0</maven-toolchains-plugin.version>
 
 		<assertj.version>3.26.3</assertj.version>
-		<error-prone.version>2.34.0</error-prone.version>
+		<error-prone.version>2.35.1</error-prone.version>
 		<findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
 		<jspecify.version>1.0.0</jspecify.version>
-		<junit-jupiter.version>5.11.2</junit-jupiter.version>
+		<junit-jupiter.version>5.11.3</junit-jupiter.version>
 		<junit-pioneer.version>2.3.0</junit-pioneer.version>
-		<junit-testkit.version>1.11.2</junit-testkit.version>
+		<junit-testkit.version>1.11.3</junit-testkit.version>
 		<nullaway.version>0.12.0</nullaway.version>
 		<opentelemetry-bom.version>1.43.0</opentelemetry-bom.version>
 	</properties>
