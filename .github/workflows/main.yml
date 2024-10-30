@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+# yaml-language-server:$schema=https://json.schemastore.org/github-workflow.json
 # https://docs.github.com/en/actions/writing-workflows
 name: CI
 
