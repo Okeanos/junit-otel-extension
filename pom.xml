@@ -50,7 +50,7 @@
 		<maven-project-info-reports-plugin.version>3.8.0</maven-project-info-reports-plugin.version>
 		<maven-resources.version>3.3.1</maven-resources.version>
 		<maven-site-plugin.version>4.0.0-M16</maven-site-plugin.version>
-		<maven-surefire.version>3.5.1</maven-surefire.version>
+		<maven-surefire.version>3.5.2</maven-surefire.version>
 		<maven-surefire-report-plugin.version>${maven-surefire.version}</maven-surefire-report-plugin.version>
 		<maven-toolchains-plugin.version>3.2.0</maven-toolchains-plugin.version>
 
