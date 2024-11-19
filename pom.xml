@@ -230,6 +230,7 @@
 						-->
 						<arg>-Werror</arg>
 						<arg>-XDcompilePolicy=simple</arg>
+						<arg>--should-stop=ifError=FLOW</arg>
 						<!--
 							For details about the standard bug patterns check:
 							- ErrorProne: https://errorprone.info/bugpatterns
