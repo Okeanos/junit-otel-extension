@@ -54,7 +54,7 @@
 		<maven-surefire-report-plugin.version>${maven-surefire.version}</maven-surefire-report-plugin.version>
 		<maven-toolchains-plugin.version>3.2.0</maven-toolchains-plugin.version>
 
-		<assertj.version>3.27.0</assertj.version>
+		<assertj.version>3.27.2</assertj.version>
 		<error-prone.version>2.36.0</error-prone.version>
 		<findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
 		<jspecify.version>1.0.0</jspecify.version>
