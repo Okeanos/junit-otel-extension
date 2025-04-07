@@ -20,19 +20,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out Git repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Extract Tool Versions
         id: tool-versions
         run: |
           java_version=$(grep -F 'java' .mise.toml | cut -d '=' -f2 | xargs | cut -d '.' -f1)
           echo "java_version=${java_version}" >> "$GITHUB_OUTPUT"
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c6aa5355ba6c12 # v4.7.0
         with:
           distribution: 'temurin'
           java-version: ${{ steps.tool-versions.outputs.java_version }}
       - name: Cache maven artifacts
-        uses: actions/cache@v4
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: |
             ~/.m2/repository
@@ -46,8 +46,3 @@ jobs:
         run: |
           cp -f .mvn/maven_ci.config .mvn/maven.config
           mvn package
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
-        with:
-          junit_files: target/surefire-reports/**/*.xml
