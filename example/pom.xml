@@ -50,10 +50,10 @@
 		<junit-otel-extension.version>0.0.1-SNAPSHOT</junit-otel-extension.version>
 
 		<httpclient.version>5.4.3</httpclient.version>
-		<junit-jupiter.version>5.12.1</junit-jupiter.version>
+		<junit-jupiter.version>5.12.2</junit-jupiter.version>
 		<logback.version>1.5.18</logback.version>
-		<opentelemetry-agent.version>2.14.0</opentelemetry-agent.version>
-		<opentelemetry-bom.version>1.48.0</opentelemetry-bom.version>
+		<opentelemetry-agent.version>2.15.0</opentelemetry-agent.version>
+		<opentelemetry-bom.version>1.49.0</opentelemetry-bom.version>
 		<opentelemetry-logback-appender-1.0.version>2.5.0-alpha</opentelemetry-logback-appender-1.0.version>
 		<opentelemetry-maven-extension.version>1.36.0-alpha</opentelemetry-maven-extension.version>
 		<slf4j.version>2.0.17</slf4j.version>
