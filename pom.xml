@@ -61,7 +61,7 @@
 		<junit-jupiter.version>5.12.2</junit-jupiter.version>
 		<junit-pioneer.version>2.3.0</junit-pioneer.version>
 		<junit-testkit.version>1.12.2</junit-testkit.version>
-		<nullaway.version>0.12.6</nullaway.version>
+		<nullaway.version>0.12.7</nullaway.version>
 		<opentelemetry-bom.version>1.49.0</opentelemetry-bom.version>
 	</properties>
 
