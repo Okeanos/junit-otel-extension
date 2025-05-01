@@ -49,7 +49,7 @@
 
 		<junit-otel-extension.version>0.0.1-SNAPSHOT</junit-otel-extension.version>
 
-		<httpclient.version>5.4.3</httpclient.version>
+		<httpclient.version>5.4.4</httpclient.version>
 		<junit-jupiter.version>5.12.2</junit-jupiter.version>
 		<logback.version>1.5.18</logback.version>
 		<opentelemetry-agent.version>2.15.0</opentelemetry-agent.version>
@@ -57,7 +57,7 @@
 		<opentelemetry-logback-appender-1.0.version>2.5.0-alpha</opentelemetry-logback-appender-1.0.version>
 		<opentelemetry-maven-extension.version>1.36.0-alpha</opentelemetry-maven-extension.version>
 		<slf4j.version>2.0.17</slf4j.version>
-		<wiremock.version>3.12.1</wiremock.version>
+		<wiremock.version>3.13.0</wiremock.version>
 	</properties>
 
 	<dependencyManagement>
