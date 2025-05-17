@@ -1,6 +1,4 @@
 {
 	"exclude": [
-		"maven-wrapper\\.properties",
-		"mvnw(\\.cmd)?$"
 	]
 }
