@@ -49,8 +49,8 @@
 
 		<junit-otel-extension.version>0.0.1-SNAPSHOT</junit-otel-extension.version>
 
-		<httpclient.version>5.4.4</httpclient.version>
-		<junit-jupiter.version>5.12.2</junit-jupiter.version>
+		<httpclient.version>5.5</httpclient.version>
+		<junit-jupiter.version>5.13.0</junit-jupiter.version>
 		<logback.version>1.5.18</logback.version>
 		<opentelemetry-agent.version>2.16.0</opentelemetry-agent.version>
 		<opentelemetry-bom.version>1.50.0</opentelemetry-bom.version>
