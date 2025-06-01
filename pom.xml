@@ -58,9 +58,9 @@
 		<error-prone.version>2.38.0</error-prone.version>
 		<findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
 		<jspecify.version>1.0.0</jspecify.version>
-		<junit-jupiter.version>5.12.2</junit-jupiter.version>
+		<junit-jupiter.version>5.13.0</junit-jupiter.version>
 		<junit-pioneer.version>2.3.0</junit-pioneer.version>
-		<junit-testkit.version>1.12.2</junit-testkit.version>
+		<junit-testkit.version>1.13.0</junit-testkit.version>
 		<nullaway.version>0.12.7</nullaway.version>
 		<opentelemetry-bom.version>1.50.0</opentelemetry-bom.version>
 	</properties>
