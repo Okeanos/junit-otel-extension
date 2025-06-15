@@ -13,5 +13,5 @@
 	markdownlint-cli2 = "0.18.1"
 	shellcheck = "0.10.0"
 	shfmt = "3.11.0"
-	taplo = "0.9.3"                # GitHub Actions sha256sum=71d655dc3f69ce30454cfade92fdbe846c0ba4aa3afa68f3ff0d216966d0d3c2
+	taplo = "0.9.3"                # GitHub Actions sha256sum=889efcfa067b179fda488427d3b13ce2d679537da8b9ed8138ba415db7da2a5e
 	yamllint = "1.37.1"
