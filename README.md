@@ -5,6 +5,11 @@ This [JUnit5](https://junit.org/) extension provides basic (and incomplete) trac
 It has been inspired by the [Dynatrace/junit-jupiter-open-telemetry-extension](https://github.com/dynatrace-oss/junit-jupiter-open-telemetry-extension)
 project.
 
+**This is a proof of concept. I currently have no intention of pursuing it further.**
+
+See this [OpenTelemetry issue](https://github.com/open-telemetry/opentelemetry-java-instrumentation/issues/8953)
+for additional information around JUnit observability and plans for native support.
+
 ## Usage
 
 To build an extension that is locally usable in other projects run:
