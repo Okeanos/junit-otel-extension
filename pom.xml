@@ -54,7 +54,7 @@
 		<maven-surefire-report-plugin.version>${maven-surefire.version}</maven-surefire-report-plugin.version>
 		<maven-toolchains-plugin.version>3.2.0</maven-toolchains-plugin.version>
 
-		<assertj.version>3.27.3</assertj.version>
+		<assertj.version>3.27.4</assertj.version>
 		<error-prone.version>2.41.0</error-prone.version>
 		<findbugs-jsr305.version>3.0.2</findbugs-jsr305.version>
 		<jspecify.version>1.0.0</jspecify.version>
@@ -62,7 +62,7 @@
 		<junit-pioneer.version>2.3.0</junit-pioneer.version>
 		<junit-testkit.version>1.13.4</junit-testkit.version>
 		<nullaway.version>0.12.7</nullaway.version>
-		<opentelemetry-bom.version>1.52.0</opentelemetry-bom.version>
+		<opentelemetry-bom.version>1.53.0</opentelemetry-bom.version>
 	</properties>
 
 	<dependencyManagement>
