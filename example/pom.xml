@@ -52,7 +52,7 @@
 		<httpclient.version>5.5</httpclient.version>
 		<junit-jupiter.version>5.13.4</junit-jupiter.version>
 		<logback.version>1.5.18</logback.version>
-		<opentelemetry-agent.version>2.18.1</opentelemetry-agent.version>
+		<opentelemetry-agent.version>2.19.0</opentelemetry-agent.version>
 		<opentelemetry-bom.version>1.53.0</opentelemetry-bom.version>
 		<opentelemetry-logback-appender-1.0.version>2.5.0-alpha</opentelemetry-logback-appender-1.0.version>
 		<opentelemetry-maven-extension.version>1.36.0-alpha</opentelemetry-maven-extension.version>
