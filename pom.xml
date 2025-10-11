@@ -8,7 +8,7 @@
 	<groupId>com.nikolasgrottendieck</groupId>
 	<artifactId>junit-otel-extension</artifactId>
 	<name>${project.artifactId}</name>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<description>A JUnit tracing and metrics extension for Open Telemetry</description>
 	<url>https://github.com/Okeanos/junit-otel-extension</url>
 
@@ -36,8 +36,7 @@
 	</distributionManagement>
 
 	<properties>
-		<!-- java 17 required for the opentelemetry-maven-extension; it doesn't support 21 -->
-		<java.version>17</java.version>
+		<java.version>25</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<maven.compiler.release>${java.version}</maven.compiler.release>

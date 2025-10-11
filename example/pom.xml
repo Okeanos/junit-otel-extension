@@ -8,7 +8,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>junit-otel-extension-example</artifactId>
 	<name>JUnit OTEL Extension Example</name>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<description>A JUnit tracing and metrics extension example using Open Telemetry</description>
 
 	<licenses>
@@ -32,8 +32,7 @@
 	</repositories>
 
 	<properties>
-		<!-- java 17 required for the opentelemetry-maven-extension; it doesn't support 21 -->
-		<java.version>17</java.version>
+		<java.version>25</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>${project.build.sourceEncoding}</project.reporting.outputEncoding>
 		<maven.compiler.release>${java.version}</maven.compiler.release>
@@ -47,15 +46,15 @@
 		<maven-surefire-report-plugin.version>${maven-surefire.version}</maven-surefire-report-plugin.version>
 		<maven-toolchains-plugin.version>3.2.0</maven-toolchains-plugin.version>
 
-		<junit-otel-extension.version>0.0.1-SNAPSHOT</junit-otel-extension.version>
+		<junit-otel-extension.version>0.0.2-SNAPSHOT</junit-otel-extension.version>
 
 		<httpclient.version>5.5.1</httpclient.version>
 		<junit-jupiter.version>5.14.0</junit-jupiter.version>
 		<logback.version>1.5.19</logback.version>
 		<opentelemetry-agent.version>2.20.1</opentelemetry-agent.version>
 		<opentelemetry-bom.version>1.54.1</opentelemetry-bom.version>
-		<opentelemetry-logback-appender-1.0.version>2.5.0-alpha</opentelemetry-logback-appender-1.0.version>
-		<opentelemetry-maven-extension.version>1.36.0-alpha</opentelemetry-maven-extension.version>
+		<opentelemetry-logback-appender-1.0.version>2.20.1-alpha</opentelemetry-logback-appender-1.0.version>
+		<opentelemetry-maven-extension.version>1.50.0-alpha</opentelemetry-maven-extension.version>
 		<slf4j.version>2.0.17</slf4j.version>
 		<wiremock.version>3.13.1</wiremock.version>
 	</properties>
