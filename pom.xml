@@ -61,7 +61,7 @@
 		<junit-pioneer.version>2.3.0</junit-pioneer.version>
 		<junit-testkit.version>1.14.0</junit-testkit.version>
 		<nullaway.version>0.12.10</nullaway.version>
-		<opentelemetry-bom.version>1.54.1</opentelemetry-bom.version>
+		<opentelemetry-bom.version>1.55.0</opentelemetry-bom.version>
 	</properties>
 
 	<dependencyManagement>
